@@ -1,6 +1,6 @@
 {
   "author": "Patrick Doran <patrick.doran@gmail.com>",
-  "name": "Client Bootstrap",
+  "name": "Client_Bootstrap",
   "description": "Bootstrap your clients!",
   "version": "0.0.0",
   "repository": {
@@ -13,10 +13,10 @@
   "dependencies": {
       "dom-js": ">=0.0.9",
       "sprintf": ">=0.1.1",
-      "underscore": ">=1.1.3",
-    },
+      "underscore": ">=1.1.3"
+  },
   "devDependencies": {
   },
   "scripts": {
-    }
+  }
 }

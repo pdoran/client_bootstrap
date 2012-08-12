@@ -4,14 +4,14 @@
 var fs = require('fs'),
 	util = require('util'),
 	_ = require('underscore'),
-  config = require('./config'),
+  config = require('./config').config,
   fm = require('./file_manipulator'),
   svn = require('./svn').svn,
   command = require('./svn').command,
   log = require('./logger').logger,
 	cp = require('child_process');
 
-
+console.log(util.inspect(config.structrue));
 var logger = log(true, true);
 
 var traverse = function(o) { 
@@ -64,7 +64,7 @@ var base = __dirname;
 command("rd", ["/s","/q",pathCombine(base,config.structure[0].name)], function (data) { logger.log("stdout: " + data);}, function (data) { logger.error('stderr: ' + data); }, function(code) {
   logger.log(pathCombine(base,config.structure[0].name) + " deleted ready for a fresh start.");
   this.path = base;
-  _.each(config.structure, traverse, {path = base});
+  _.each(config.structure, traverse, {path: base});
 });
 command("rd", ["/s","/q",pathCombine(base,"Support")], function (data) { logger.log("stdout: " + data);}, function (data) { logger.error('stderr: ' + data); }, function(code) {
   logger.log(pathCombine(base,"Support") + " deleted ready for a fresh start.");
@@ -91,7 +91,7 @@ command("rd", ["/s","/q",pathCombine(base,"CC.NET")], function (data) { logger.l
       logger.error("SVN Failed, cannot update support files.");
     }
   });
-}); 
+});
 
 
 

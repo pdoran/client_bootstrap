@@ -1,39 +1,38 @@
-exports = function() {
-  var fm = require('./file_manipulator');
-  var APPENDTYPE = { TXT: fm.txtManipulation, XML: fm.xmlManipulation };
-  
-return 
-{ 
-    globalConfig : { 
+var fm = require('./file_manipulator');
+var APPENDTYPE = { TXT: fm.txtManipulation, XML: fm.xmlManipulation };
+var globalConfig = { 
     client: "Blackbaud",
     version: "5.20.0Beta20120801",
     dbinstance: "dclab03\\sqlexpress",
     dbuser: "worklenz",
     supportPath: 'svn://dcscm01/cds/CDS/Utilities/Build Server/Support'
-  },
+  };
+  
+exports.config = {
+  globalConfig : globalConfig,
   fileUpdates : [
     {
       file: "deploy.post.client.email.txt",
       format: "\r\n%(config.client)s;clientdevelopmentservices@metier.com",
-      append:APPENDTYPE.TXT,
+      append:APPENDTYPE.TXT
     },
     {
       file: "deploy.internal.environment.trunk.conn.strings.txt",
       format: "\r\n%(config.client)s,sqlserver,%(config.dbinstance)s,%(config.dbname)s,%(config.dbuser)s",
-      append:APPENDTYPE.TXT,
+      append:APPENDTYPE.TXT
     },
     {
       file: "client_custom_db_tables.xml",
       format: '<?xml version="1.0" encoding="utf-8"?>\r\n  <client value="%(config.client)s">\r\n    <tables>\r\n      <table model="not_completed" />\r\n    </tables>\r\n  </client>\r\n',
-      append:APPENDTYPE.XML,
+      append:APPENDTYPE.XML
     },
     {
       file: "deploy.wf.location.txt",
       format: "\r\n%(config.client)s,\\\\dclab02\\c$\\wf\\workflow-definitions",
-      append:APPENDTYPE.TXT,
+      append:APPENDTYPE.TXT
     }
   ],
-  structrue : [{
+  structure : [{
     name: globalConfig.client,
     folder: [
         {
@@ -76,5 +75,4 @@ return
         }
       ]
   }]
-};
 };
